@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
 import {
   Sidebar,
@@ -12,8 +12,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import Image from "next/image"
+} from "@/components/ui/sidebar";
+import Image from "next/image";
 import { useFormStore } from "@/store/form.store";
 
 // This is sample data.
@@ -46,21 +46,29 @@ const data = {
         {
           title: "Share",
           url: "#",
-        }
+        },
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-      const { template, setSteps, steps } = useFormStore();
-  
+  const { template, setSteps, steps } = useFormStore();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <button onClick={() => setSteps(steps - 1)}
- className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px]">
-          <Image src="/assets/left-arrow.svg" alt="Back" width={17} height={17} className="" />
+        <button
+          onClick={() => setSteps(steps - 1)}
+          className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px]"
+        >
+          <Image
+            src="/assets/left-arrow.svg"
+            alt="Back"
+            width={17}
+            height={17}
+            className=""
+          />
           Back
         </button>
       </SidebarHeader>
@@ -69,10 +77,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroup key={item.url} className="pl-5">
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
+                {item.items.map((item, index) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton className="px-[12.4px] py-[2.5px] rounded-[7.48px] bg-[#FAF9F5] w-fit" asChild isActive={item.isActive}>
-                      <p className="text-[22.45px] text-black font-bold">{item.title}</p>
+                    <SidebarMenuButton
+                      className={`px-[12.4px] py-[2.5px] rounded-[7.48px] w-fit ${
+                        steps === index + 1 ? "bg-[#FAF9F5]" : "bg-white"
+                      }`}
+                      asChild
+                      isActive={steps === index + 1}
+                    >
+                      <p className="text-[22.45px] text-black font-bold">
+                        {item.title}
+                      </p>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -83,5 +99,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

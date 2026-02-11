@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from '../ui/button'
 import { useFormStore } from '@/store/form.store';
 import Image from 'next/image';
 import confetti from 'canvas-confetti';
@@ -13,6 +12,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { motion } from 'motion/react';
+import { Button } from '@/components/ui/button';
 
 
 const Share = () => {
@@ -54,16 +54,16 @@ const ShareFirst = () => {
                     <p className="text-[10px] noto-sans">Use AI</p>
                 </div>
             </div>
-            <article className='max-w-[805px] relative w-full md:px-[85px] bg-white md:pt-[60px] pt-[30px] pb-[60px] flex flex-col min-h-full'>
+            <article className='max-w-[805px] relative w-full  bg-white md:pt-[60px] pt-[30px] pb-[60px] flex flex-col h-fit'>
                 <div className='flex mb-[25px] items-center justify-between'>
                     <div className='flex items-center gap-2'>
-                        <Image src='/star.svg' alt='star' className='group-hover:rotate-12 transition-all' width={44} height={44} />
+                        <Image src='/assets/star.svg' alt='star' className='group-hover:rotate-12 transition-all' width={44} height={44} />
                         <p className='text-[#1e1e1ebf] text-[22px]/[30px] font-bold'>Heyy {recipientFirstName},</p>
                     </div>
-                    <Image src='/circlee.svg' alt='circle' className='group-hover:rotate-12 transition-all' width={24} height={24} />
+                    <Image src='/assets/circlee.svg' alt='circle' className='group-hover:rotate-12 transition-all' width={24} height={24} />
                 </div>
-                <Image src='/purplecircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute left-6 top-0 bottom-0 my-auto' width={24} height={24} />
-                <Image src='/yellowcircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute bottom-56 right-7' width={24} height={24} />
+                <Image src='/assets/purplecircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute left-6 top-0 bottom-0 my-auto' width={24} height={24} />
+                <Image src='/assets/yellowcircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute bottom-56 right-7' width={24} height={24} />
                 <div className='bg-[#FFF3F3] h-full md:p-[70px] p-[30px] flex flex-col items-center'>
 
                     <p className='text-[15px]/[21px] font-medium noto-sans'>{formatMessage(message).map((para, index) => (
@@ -72,9 +72,9 @@ const ShareFirst = () => {
 
                     <p className='text-[73px]/[87px] font-normal -rotate-[7deg] mt-[32px] indie-flower'>{senderFirstName}</p>
                 </div>
-                <Image src='/yesno.svg' alt='circle' className='group-hover:rotate-12 transition-all self-center md:self-end mt-[37px]' width={243} height={40} />
+                <Image src='/assets/yesno.svg' alt='circle' className='group-hover:rotate-12 transition-all self-center md:self-end mt-[37px]' width={243} height={40} />
             </article>
-            <Button onClick={submitMessage} disabled={template == ''} className='text-black mx-auto mb-[42px] hover:text-white w-[107px] bg-[#FFFFFF] py-[10px] px-5 flex items-center gap-[10px]'>Enter <Image src='/icons/arrow-up.svg' alt='arrow' className='group-hover:rotate-12 transition-all' width={20} height={20} /></Button>
+            <Button onClick={submitMessage} disabled={template == ''} className='text-black mx-auto mb-[42px] hover:text-white w-[107px] bg-[#d3c2c2] py-[10px] px-5 flex items-center gap-[10px]'>Enter <Image src='/icons/arrow-up.svg' alt='arrow' className='group-hover:rotate-12 transition-all' width={20} height={20} /></Button>
         </section>
     )
 }
@@ -129,11 +129,11 @@ const ShareSecond = () => {
     };
 
     const images = [
-        { src: "/lovee.svg", alt: "love", className: "md:top-[26%] top-[15%] md:left-2 left-5 md:w-[59px] w-[45px]", width: 59, height: 48 },
-        { src: "/maill.svg", alt: "mail", className: "top-[13%] left-[35%] md:w-[71px] w-[42px]", width: 71, height: 71 },
-        { src: "/linkk.svg", alt: "link", className: "md:top-[15%] top-[85%] md:right-[30%] right-[80%] md:w-[65px] w-[51px] ", width: 65, height: 65 },
-        { src: "/beaa.svg", alt: "bea", className: "md:top-[10%] top-[85%] md:right-[10%] right-[15%] md:w-[99px] w-[48px] ", width: 99, height: 195 },
-        { src: "/heartt.svg", alt: "heartt", className: "md:top-[30%] top-[10%] md:right-[5%] right-[10%]", width: 59, height: 48 },
+        { src: "/assets/lovee.svg", alt: "love", className: "md:top-[26%] top-[15%] md:left-2 left-5 md:w-[59px] w-[45px]", width: 59, height: 48 },
+        { src: "/assets/maill.svg", alt: "mail", className: "top-[13%] left-[35%] md:w-[71px] w-[42px]", width: 71, height: 71 },
+        { src: "/assets/linkk.svg", alt: "link", className: "md:top-[15%] top-[85%] md:right-[30%] right-[80%] md:w-[65px] w-[51px] ", width: 65, height: 65 },
+        { src: "/assets/beaa.svg", alt: "bea", className: "md:top-[10%] top-[85%] md:right-[10%] right-[15%] md:w-[99px] w-[48px] ", width: 99, height: 195 },
+        { src: "/assets/heartt.svg", alt: "heartt", className: "md:top-[30%] top-[10%] md:right-[5%] right-[10%]", width: 59, height: 48 },
     ];
 
     const imageVariants = {
@@ -146,35 +146,29 @@ const ShareSecond = () => {
     };
 
     return (
-        <section className='flex flex-col px-3 relative'>
-            <h1 className='text-[45px]/[83px] font-semibold mb-[5px] z-[999999] relative text-black mt-10 md:text-start text-center'>Your message is ready!</h1>
-            <p className='text-[16px]/[auto] noto-sans font-normal max-w-[547px]  mb-[30px] text-center md:text-start'>Now, it&apos;s time to send it and make their day a little sweeter. 💖  Copy and send your personalized Valentine&apos;s message to them. Let&apos;s see if they say yes! 😉Goodluck!!</p>
+        <section className='flex flex-col px-3  h-full'>
+            <h1 className='text-[42px]/[100%] font-normal mb-[95px] z-[999999] relative text-black mt-10 text-center font-pp-mondwest'>Your Message for <span className='font-pp-neuebit text-[50px] font-bold'>{recipientFirstName}</span> is ready</h1>
+            <p className='text-[30px]/[100%] noto-sans font-bold max-w-[547px]  mb-[50px] text-center '>Now, it’s time to send it and make their day a little sweeter. Copy and send your personalized Valentine’s message to them. Let’s see if they say yes! Goodluck!!</p>
             <p className='md:text-[25px] text-[18px] font-semibold text-center'>{link}</p>
             <div className='flex items-center gap-[10px] mx-auto relative overflow-hidden'>
-                <div onClick={handleCopy} className='focus:border-[#fdadad] focus:border-2 bg-[#FFF3F3] flex flex-col gap-[17px] items-start justify-end p-5 rounded-[10px] w-[150px] h-[113px] cursor-pointer'>
-                    <Image src='/linkkk.svg' alt='' width={33} height={33} />
-                    <p className="text-base/[auto]">
-                        {copied ? "Copied!" : "Copy Link"}
-                    </p>
-                </div>
                 <Dialog>
                     <DialogTrigger>
-                        <div onClick={handleDownload} className='focus:border-[#fdadad] focus:border-2 bg-[#FFF3F3] flex flex-col gap-[17px] items-start justify-end p-5 rounded-[10px] w-[170px] h-[113px] cursor-pointer'>
-                            <Image src='/download-01.svg' alt='' width={33} height={33} />
-                            <p className='text-base/[auto]'>Download Image </p>
+                        <div onClick={handleDownload} className='focus:border-[#fdadad] focus:border-2 bg-[#FFF3F3] flex flex-col gap-[17px] items-center justify-center p-5 rounded-[10px] w-[214px] h-[140px] cursor-pointer'>
+                            <Image src='/assets/disk.svg' alt='' width={70} height={70} />
+                            <p className='text-[20px]/[100%]'>Download Image </p>
                         </div>
                     </DialogTrigger>
                     <DialogContent className='flex flex-col !max-w-[800px] md:px-[85px]'>
                         <article className='font-american max-w-[805px] relative w-full  bg-white md:pt-[60px] pt-[30px] pb-[30px] flex flex-col min-h-full'>
                             <div className='flex mb-[25px] items-center justify-between'>
                                 <div className='flex items-center gap-2'>
-                                    <Image src='/star.svg' alt='star' className='group-hover:rotate-12 transition-all' width={44} height={44} />
+                                    <Image src='/assets/star.svg' alt='star' className='group-hover:rotate-12 transition-all' width={44} height={44} />
                                     <p className='text-[#1e1e1ebf] text-[22px]/[30px] font-bold'>Heyy {recipientFirstName},</p>
                                 </div>
-                                <Image src='/circlee.svg' alt='circle' className='group-hover:rotate-12 transition-all' width={24} height={24} />
+                                <Image src='/assets/circlee.svg' alt='circle' className='group-hover:rotate-12 transition-all' width={24} height={24} />
                             </div>
-                            <Image src='/purplecircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute left-6 top-0 bottom-0 my-auto' width={24} height={24} />
-                            <Image src='/yellowcircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute bottom-56 right-7' width={24} height={24} />
+                            <Image src='/assets/purplecircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute left-6 top-0 bottom-0 my-auto' width={24} height={24} />
+                            <Image src='/assets/yellowcircle.svg' alt='circle' className='group-hover:rotate-12 transition-all absolute bottom-56 right-7' width={24} height={24} />
                             <div className='bg-[#FFF3F3] h-full md:p-[70px] p-[30px] flex flex-col items-center'>
 
                                 <p className='text-[15px]/[21px] font-medium noto-sans'>{formatMessage(message).map((para, index) => (
@@ -185,11 +179,18 @@ const ShareSecond = () => {
                             </div>
                         </article>
                         <div onClick={handleDownload} className='focus:border-[#fdadad] self-center md:self-end focus:border-2 bg-[#FFF3F3] flex flex-col gap-[17px] items-start justify-end p-5 rounded-[10px] w-[170px] h-[113px] cursor-pointer'>
-                            <Image src='/download-01.svg' alt='' width={33} height={33} />
+                            <Image src='/assets/disk.svg' alt='' width={33} height={33} />
                             <p className='text-base/[auto]'>{download ? 'Downloading..' : 'Download Image'}</p>
                         </div>
                     </DialogContent>
                 </Dialog>
+                <div onClick={handleCopy} className='focus:border-[#fdadad] focus:border-2 bg-[#FFF3F3] flex flex-col gap-[17px] items-center justify-center p-5 rounded-[10px] w-[214px] h-[140px]  cursor-pointer'>
+                    <Image src='/assets/link.svg' alt='' width={80} height={80} />
+                    <p className="text-[20px]/[100%]">
+                        {copied ? "Copied!" : "Copy Link"}
+                    </p>
+                </div>
+
 
                 <section ref={captureRef} className="font-american min-w-[850px] absolute left-[1999px] top-[1999px]  flex px-4 bg-cover bg-no-repeat flex-col bg items-center  text-black justify-center bg-[url('/lovebg.svg')] ">
                     {images.map((img, i) => (
@@ -240,6 +241,9 @@ const ShareSecond = () => {
                     </div>
                 </section>
             </div >
+            <Image src='/assets/done.svg' alt='' width={174} height={174} className='cursor-pointer absolute top-96 right-48' />
+
+            <Image src='/assets/abstract.svg' alt='' width={241} height={259} className='cursor-pointer absolute  bottom-0 right-0' />
         </section >
     )
 }

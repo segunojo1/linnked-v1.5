@@ -25,7 +25,6 @@ const Preview = () => {
                 height={15}
                 className="cursor-pointer"
               />
-              <p className="text-[10px] noto-sans">Use AI</p>
                 </div>
             </div>
                 <article className='max-w-[805px] relative min-w-full  bg-white pt-[60px] pb-[60px] flex flex-col  h-fit'>

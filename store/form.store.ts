@@ -10,6 +10,10 @@ interface FormType {
     message: string;
     messageTitle: string;
     aiGenerated: boolean;
+    formDone: boolean;
+    link: string;
+    setLink: (link: string) => void;
+    setFormDone: (value: boolean) => void;
     setAiGenerated: (value: boolean) => void;
     setMessageTitle: (messageTitle: string) => void;
     setMessage: (message: string) => void;
@@ -30,8 +34,12 @@ export const useFormStore = create<FormType>((set) => (
         recipientFirstName: "",
         template: "",
         message: "",
-        messageTitle: "Title",
+        messageTitle: "Will you be my val",
         aiGenerated: false,
+        formDone: false,
+        link:  "",
+        setLink: (link: string) => set({ link }),
+        setFormDone: (formDone: boolean) => set({ formDone }),
         setAiGenerated: (aiGenerated: boolean) => set({ aiGenerated }),
         setMessageTitle: (messageTitle: string) => set({ messageTitle }),
         setMessage: (message: string) => set({ message }),
