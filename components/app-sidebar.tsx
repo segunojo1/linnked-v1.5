@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import {
@@ -12,6 +14,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
+import { useFormStore } from "@/store/form.store";
 
 // This is sample data.
 const data = {
@@ -25,11 +28,11 @@ const data = {
           url: "#",
         },
         {
-          title: "Message",
+          title: "Template",
           url: "#",
         },
         {
-          title: "Template",
+          title: "Message",
           url: "#",
         },
         {
@@ -50,23 +53,26 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+      const { template, setSteps, steps } = useFormStore();
+  
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <div className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px] tracking-[2%] font-bold w-fit rounded-[22px]">
+        <button onClick={() => setSteps(steps - 1)}
+ className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px]">
           <Image src="/assets/left-arrow.svg" alt="Back" width={17} height={17} className="" />
           Back
-        </div>
+        </button>
       </SidebarHeader>
       <SidebarContent>
         {data.navMain.map((item) => (
-          <SidebarGroup key={item.url}>
+          <SidebarGroup key={item.url} className="pl-5">
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton className="px-[12.4px] py-[2.5px] rounded-[7.48px] bg-[red] w-fit" asChild isActive={item.isActive}>
-                      <p className="text-[22.45px] font-bold">{item.title}</p>
+                    <SidebarMenuButton className="px-[12.4px] py-[2.5px] rounded-[7.48px] bg-[#FAF9F5] w-fit" asChild isActive={item.isActive}>
+                      <p className="text-[22.45px] text-black font-bold">{item.title}</p>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Separator } from "@/components/ui/separator";
-
+import localFont from "next/font/local";
+import Image from "next/image";
+import ClientLayout from "./client-layout";
 
 export const metadata: Metadata = {
   title: "Linnked",
@@ -15,32 +16,46 @@ export const metadata: Metadata = {
 //   subsets: ["latin"],
 // });
 
+const PPNeueBit = localFont({
+  src: "/fonts/ppneuebit-bold.otf",
+  variable: "--font-pp-neue-bit",
+});
+
+const PPMondWest = localFont({
+  src: "/fonts/ppmondwest-regular.otf",
+  variable: "--font-pp-mondwest",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-
+    <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable} `}>
+      <body className="antialiased font-pp-neuebit">
         <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          <AppSidebar />
+
+          <SidebarInset>
+            {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
           <Separator
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
-        </header>
-        
-        {children}
-      </SidebarInset>
-    </SidebarProvider>
-
+        </header> */}
+            <ClientLayout>{children}</ClientLayout>
+          </SidebarInset>
+        </SidebarProvider>
+        {/* <div className="absolute bottom-0 left-0 right-0 z-[9999999999] w-full">
+          <Image
+            src="/assets/flowers-bottom.svg"
+            alt="flowers"
+            width={1554}
+            height={164}
+          />
+        </div> */}
       </body>
     </html>
   );
