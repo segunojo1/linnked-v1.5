@@ -3,7 +3,6 @@ import "./globals.css";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import localFont from "next/font/local";
-import Image from "next/image";
 import ClientLayout from "./client-layout";
 
 export const metadata: Metadata = {

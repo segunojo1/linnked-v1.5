@@ -272,7 +272,7 @@ const SendMessage = () => {
                            setMessage(aiPromptText);
                            setMainLetterText(aiPromptText);
                          }
-                       }}
+                      }}
                        disabled={!aiPromptText.trim()}
                      >
                        New

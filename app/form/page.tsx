@@ -6,9 +6,10 @@ import SendMessage from './_components/send-message';
 import Template from './_components/template';
 import Preview from './_components/preview';
 import Share from './_components/share';
+import Typewriter from './_components/typewriter';
 
 const FormPage = () => {
-    const {steps} = useFormStore();
+  const { template, steps } = useFormStore();
 
     const formSteps = () => {
         switch (steps) {
@@ -21,8 +22,13 @@ const FormPage = () => {
                     <Template />
                 );
             case 3:
-                return (
+                if (template == 'singlepage') {
+                    return (
                     <SendMessage />
+                );
+                }
+                return (
+                    <Typewriter />
                 );
             case 4:
                 return (

@@ -16,9 +16,7 @@ import {
 import Image from "next/image";
 import { useFormStore } from "@/store/form.store";
 
-// This is sample data.
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
       url: "#",
