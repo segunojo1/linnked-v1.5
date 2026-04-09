@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { PenTool } from "lucide-react";
+import { useFormStore } from "@/store/form.store";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const Typewriter = () => {
-  const [title, setTitle] = useState("");
+  // const [title, setTitle] = useState("");
+  const {message, setMessage} = useFormStore();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
 
@@ -96,14 +96,14 @@ const Typewriter = () => {
               <div className="flex flex-col z-[999] relative  -bottom-10 mr-[140px] gap-[30px]  w-[559.2px] border-[#E5E5E5] bg-white rounded-2xl border-[0.5px] p-[23px] pb-[118px] font-neuemontreal text-[16px] font-medium">
                 <Textarea
                   ref={textareaRef}
-                  value={title}
+                  value={message}
                   placeholder=""
                   className="w-full resize-none overflow-scroll border-none outline-none shadow-none focus-visible:ring-0 bg-transparent text-[16px] leading-6 font-neuemontreal font-medium text-stone-800 p-0 h-[200px] caret-stone-800"
                   spellCheck={false}
                   onKeyDown={playKeySound}
                   onChange={(e) => {
-                    setTitle(e.target.value);
-                    console.log("Title changed:", e.target.value);
+                    setMessage(e.target.value);
+                    console.log("Message changed:", e.target.value);
                   }}
                 />
               </div>
