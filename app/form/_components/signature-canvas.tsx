@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { useEffect, useRef, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { useEffect, useRef, useState } from "react";
 
 interface SignatureCanvasProps {
   onSignatureChange: (signatureData: string) => void;
   onClose: () => void;
 }
 
-const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) => {
+const SignatureCanvas = ({
+  onSignatureChange,
+  onClose,
+}: SignatureCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
 
@@ -16,7 +19,7 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Set canvas size
@@ -24,7 +27,7 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
     canvas.height = canvas.offsetHeight;
 
     // Set white background
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
@@ -33,13 +36,12 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
 
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -51,16 +53,16 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.strokeStyle = '#000000';
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#000000";
     ctx.lineTo(x, y);
     ctx.stroke();
   };
@@ -73,10 +75,10 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
@@ -98,7 +100,7 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
         className="w-full border-2 border-stone-300 rounded-md cursor-crosshair bg-white"
-        style={{ height: '200px' }}
+        style={{ height: "200px" }}
       />
       <div className="flex gap-2">
         <button
@@ -112,9 +114,7 @@ const SignatureCanvas = ({ onSignatureChange, onClose }: SignatureCanvasProps) =
         <Button variant="outline" onClick={onClose}>
           Cancel
         </Button>
-        <Button onClick={handleSign}>
-          Sign
-        </Button>
+        <Button onClick={handleSign}>Sign</Button>
       </div>
     </div>
   );
