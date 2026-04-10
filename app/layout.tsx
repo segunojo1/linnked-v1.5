@@ -4,6 +4,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import localFont from "next/font/local";
 import ClientLayout from "./client-layout";
+import SidebarShell from "@/components/sidebar-shell";
 
 export const metadata: Metadata = {
   title: "Linnked",
@@ -33,20 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable} `}>
       <body className="antialiased font-pp-neuebit">
-        <SidebarProvider>
-          <AppSidebar />
-
-          <SidebarInset>
-            {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-        </header> */}
+        <SidebarShell>
             <ClientLayout>{children}</ClientLayout>
-          </SidebarInset>
-        </SidebarProvider>
+        </SidebarShell>
+          
         {/* <div className="absolute bottom-0 left-0 right-0 z-[9999999999] w-full">
           <Image
             src="/assets/flowers-bottom.svg"

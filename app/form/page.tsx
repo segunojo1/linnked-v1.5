@@ -8,6 +8,7 @@ import Preview from "./_components/preview";
 import Share from "./_components/share";
 import Typewriter from "./_components/typewriter";
 import NewPreview from "./_components/newPreview";
+import NewShare from "./_components/NewShare";
 
 const FormPage = () => {
   const { template, steps } = useFormStore();
@@ -29,7 +30,10 @@ const FormPage = () => {
         }
         return <NewPreview />;
       case 5:
-        return <Share />;
+        if (template == "singlepage") {
+          return <Share />;
+        }
+        return <NewShare />;
       default:
         return null;
     }

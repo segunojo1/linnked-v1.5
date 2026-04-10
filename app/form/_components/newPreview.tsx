@@ -19,119 +19,17 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { iconOptions } from "@/lib/data";
+import { HeaderIconItem } from "@/types/data";
 
-type HeaderIconItem = {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  note: string;
-};
 
-const initialHeaderIcons: HeaderIconItem[] = [
-  {
-    src: "/assets/preview1.svg",
-    alt: "first preview image",
-    width: 66,
-    height: 90,
-    note: "",
-  },
-  {
-    src: "/assets/preview2.svg",
-    alt: "flower",
-    width: 80,
-    height: 80,
-    note: "",
-  },
-  {
-    src: "/assets/preview3.svg",
-    alt: "third preview image",
-    width: 89,
-    height: 76,
-    note: "",
-  },
-  {
-    src: "/assets/preview4.svg",
-    alt: "fourth preview image",
-    width: 90,
-    height: 90,
-    note: "",
-  },
-  {
-    src: "/assets/preview7.svg",
-    alt: "fifth preview image",
-    width: 90,
-    height: 88,
-    note: "",
-  },
-  {
-    src: "/assets/preview6.svg",
-    alt: "sixth preview image",
-    width: 76,
-    height: 76,
-    note: "",
-  },
-];
-
-const iconOptions = {
-  flowers: [
-    "/flowers/regular-shape/1.svg",
-    "/flowers/regular-shape/1-1.svg",
-    "/flowers/regular-shape/1-2.svg",
-    "/flowers/regular-shape/2.svg",
-    "/flowers/regular-shape/2-1.svg",
-    "/flowers/regular-shape/3.svg",
-    "/flowers/regular-shape/4.svg",
-    "/flowers/regular-shape/5.svg",
-    "/flowers/regular-shape/6.svg",
-    "/flowers/regular-shape/7.svg",
-  ],
-  glass: [
-    "/glass/regular-shape/png.svg",
-    "/glass/regular-shape/png-1.svg",
-    "/glass/regular-shape/png-2.svg",
-    "/glass/regular-shape/png-3.svg",
-    "/glass/regular-shape/png-4.svg",
-    "/glass/regular-shape/png-5.svg",
-    "/glass/regular-shape/png-6.svg",
-    "/glass/regular-shape/png-7.svg",
-    "/glass/regular-shape/png-8.svg",
-    "/glass/regular-shape/png-9.svg",
-  ],
-  sticker: [
-    "/stickers/regular-shape/100.svg",
-    "/stickers/regular-shape/Airplane.svg",
-    "/stickers/regular-shape/Apple.svg",
-    "/stickers/regular-shape/April.svg",
-    "/stickers/regular-shape/Ball.svg",
-    "/stickers/regular-shape/Bee.svg",
-    "/stickers/regular-shape/Book.svg",
-    "/stickers/regular-shape/Camera.svg",
-    "/stickers/regular-shape/Crown.svg",
-    "/stickers/regular-shape/Flower 1.svg",
-  ],
-  shapes: [
-    "/shapes/regular-shape/A1.svg",
-    "/shapes/regular-shape/A2.svg",
-    "/shapes/regular-shape/A3.svg",
-    "/shapes/regular-shape/A4.svg",
-    "/shapes/regular-shape/B1.svg",
-    "/shapes/regular-shape/B2.svg",
-    "/shapes/regular-shape/B3.svg",
-    "/shapes/regular-shape/B4.svg",
-    "/shapes/regular-shape/C1.svg",
-    "/shapes/regular-shape/C2.svg",
-  ],
-} as const;
 
 type IconCategory = keyof typeof iconOptions;
 
 const NewPreview = () => {
-  const { message } = useFormStore();
+  const { message, headerIcons, setHeaderIcons, signature, setSignature } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
-  const [signature, setSignature] = useState<string>("");
-  const [headerIcons, setHeaderIcons] =
-    useState<HeaderIconItem[]>(initialHeaderIcons);
+  // const [signature, setSignature] = useState<string>("");
   const [isIconEditorOpen, setIsIconEditorOpen] = useState(false);
   const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(
     null,
@@ -195,28 +93,29 @@ const NewPreview = () => {
         ))}
       </div>
 
-      <div className="w-full max-w-2xl bg-white rounded-lg p-8 shadow-md">
+      <div className="w-full max-w-[472px] bg-white min-h-[60%] rounded-lg p-8 shadow-md flex flex-col justify-between ">
         <div className="text-[16px] leading-6 font-neuemontreal font-medium text-stone-800 whitespace-pre-wrap mb-12">
           {message}
         </div>
+        <div className="">
+          <div className="flex flex-col gap-6 items-start">
+            {signature ? (
+              <img src={signature} alt="signature" className="w-32 h-20" />
+            ) : (
+              <Button onClick={() => setIsSignatureOpen(true)}>
+                Add Signature
+              </Button>
+            )}
+          </div>
 
-        <div className="flex flex-col gap-6 items-start">
-          {signature ? (
-            <img src={signature} alt="signature" className="w-32 h-20" />
-          ) : (
-            <Button onClick={() => setIsSignatureOpen(true)}>
-              Add Signature
-            </Button>
-          )}
+          <Image
+            src="/assets/yesnoo.svg"
+            alt="yes or no"
+            height={34.9}
+            width={81.5}
+            className="justify-self-end mt-8.75"
+          />
         </div>
-
-        <Image
-          src="/assets/yesnoo.svg"
-          alt="yes or no"
-          height={34.9}
-          width={81.5}
-          className="justify-self-end mt-8.75"
-        />
       </div>
 
       <Dialog open={isSignatureOpen} onOpenChange={setIsSignatureOpen}>
@@ -232,7 +131,7 @@ const NewPreview = () => {
       </Dialog>
 
       <Sheet open={isIconEditorOpen} onOpenChange={setIsIconEditorOpen}>
-        <SheetContent className="w-full border-l border-stone-200 bg-[#f3f3f3] p-0 sm:max-w-190">
+        <SheetContent className="w-full z-9999999 border-l border-stone-200 bg-[#f3f3f3] p-0 sm:max-w-190">
           <SheetHeader className="flex-row items-center justify-between border-b border-stone-200 px-6 py-5">
             <SheetTitle className="text-[20px] font-medium text-stone-900">
               Edit Icon
@@ -308,7 +207,10 @@ const NewPreview = () => {
                             <button
                               key={`${category}-${idx}`}
                               type="button"
-                              onClick={() => updateSelectedIconImage(src)}
+                              onClick={() => {
+                                updateSelectedIconImage(src);
+                                setIsIconEditorOpen(false);
+                              }}
                               className="flex h-14 w-14 items-center justify-center rounded-full border border-transparent transition hover:border-stone-300"
                             >
                               <Image
