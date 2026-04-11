@@ -27,7 +27,7 @@ import { HeaderIconItem } from "@/types/data";
 type IconCategory = keyof typeof iconOptions;
 
 const NewPreview = () => {
-  const { message, headerIcons, setHeaderIcons, signature, setSignature } = useFormStore();
+  const { message, headerIcons, setHeaderIcons, signature, setSignature, backgroundImage } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
   // const [signature, setSignature] = useState<string>("");
   const [isIconEditorOpen, setIsIconEditorOpen] = useState(false);
@@ -68,6 +68,18 @@ const NewPreview = () => {
 
   return (
     <section className="flex flex-col items-center gap-12.5 h-full max-h-screen mt-11.25">
+      {backgroundImage ? (
+              <div>
+                <Image
+                  src={backgroundImage}
+                  alt="Background"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-white/10" />
+              </div>
+            ) : null}
       <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest">
         A little something for you ;)
       </h1>
@@ -86,14 +98,21 @@ const NewPreview = () => {
               height={icon.height}
               width={icon.width}
             />
-            <span className="pointer-events-none absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#F6EDEC] px-3 py-1 text-[20px] leading-none text-black opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
-              Click to Edit -&gt;
-            </span>
+            <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+              <span className="whitespace-nowrap rounded-full bg-[#F6EDEC] px-3 py-1 text-[20px] leading-none text-black shadow-sm">
+                Click to Edit -&gt;
+              </span>
+              {icon.note ? (
+                <span className="max-w-56 rounded-[10px] border-[.5px] border-[#E5E5E5] bg-[#FFFFFF1A] px-3 py-2 text-center text-[18px] leading-[1.05] text-stone-900 shadow-sm whitespace-pre-wrap wrap-break-word">
+                  {icon.note}
+                </span>
+              ) : null}
+            </div>
           </button>
         ))}
       </div>
 
-      <div className="w-full max-w-[472px] bg-white min-h-[60%] rounded-lg p-8 shadow-md flex flex-col justify-between ">
+      <div className="w-full max-w-118 bg-white min-h-[60%] rounded-lg p-8 shadow-md flex flex-col justify-between ">
         <div className="text-[16px] leading-6 font-neuemontreal font-medium text-stone-800 whitespace-pre-wrap mb-12">
           {message}
         </div>
@@ -114,6 +133,7 @@ const NewPreview = () => {
             height={34.9}
             width={81.5}
             className="justify-self-end mt-8.75"
+            draggable={false}
           />
         </div>
       </div>
@@ -151,7 +171,7 @@ const NewPreview = () => {
                 <TabsTrigger value="change">Change Icon</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="note" className="mt-6 space-y-8">
+              <TabsContent value="note" className="mt-3 space-y-6">
                 <div className="flex justify-center">
                   {selectedIcon && (
                     <Image
@@ -163,7 +183,7 @@ const NewPreview = () => {
                   )}
                 </div>
 
-                <div className="mx-auto w-full max-w-85 rounded-[18px] border border-stone-200 bg-[#f8f8f8] p-4 text-[36px]/[100%] font-neuemontreal text-stone-900">
+                <div className="mx-auto whitespace-pre-wrap wrap-break-word w-full max-w-full rounded-[18px] border border-stone-200 bg-[#f8f8f8] p-2 text-[30px]/[100%] font-neuemontreal text-stone-900">
                   {selectedIcon?.note ||
                     "Everything about you reminds me of a pretty flower..."}
                 </div>

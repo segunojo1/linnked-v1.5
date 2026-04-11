@@ -79,7 +79,7 @@ const ShareFirst = () => {
     )
 }
 
-const ShareSecond = () => {
+export const ShareSecond = () => {
     useEffect(() => {
         confetti({
             particleCount: 150,
@@ -241,6 +241,7 @@ const ShareSecond = () => {
                     </div>
                 </section>
             </div >
+            <p className='text-[30px]'>{link}</p>
             <Image src='/assets/done.svg' alt='' width={174} height={174} className='cursor-pointer absolute top-96 right-48' />
 
             <Image src='/assets/abstract.svg' alt='' width={241} height={259} className='cursor-pointer absolute  bottom-0 right-0' />

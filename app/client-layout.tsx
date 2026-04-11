@@ -5,9 +5,8 @@ import Image from "next/image";
 import { useFormStore } from "@/store/form.store";
 
 const ClientLayout = ({ children }: { children: React.ReactNode }) => {
-  const { template, setSteps, steps } = useFormStore();
+  const { template, setSteps, steps, backgroundImage, setBackgroundImage } = useFormStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [backgroundImage, setBackgroundImage] = useState<string>("");
   console.log(steps, template);
 
   const handlePickBackground = () => {
@@ -50,18 +49,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       </button>
         )
       }
-      {backgroundImage ? (
-        <div>
-          <Image
-            src={backgroundImage}
-            alt="Background"
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-white/10" />
-        </div>
-      ) : null}
+      
       <div className="flex items-center absolute  z-[999] mr-5 mt-[35px] self-end p-4 gap-2">
         {steps == 4 && template == "new" && (
           <button

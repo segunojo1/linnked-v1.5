@@ -8,10 +8,10 @@ import { AppSidebar } from "./app-sidebar";
 export default function SidebarShell({children}: {children: React.ReactNode}) {
     const { steps } = useFormStore();
 
-    const sidebarOpen = steps < 5;
+    const sidebarOpen = steps == 5;
 
     return (
-        <SidebarProvider open={sidebarOpen} onOpenChange={() => {}}>
+        <SidebarProvider open={!sidebarOpen} onOpenChange={() => {}}>
             <AppSidebar />
             <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>

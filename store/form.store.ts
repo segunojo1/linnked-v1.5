@@ -13,6 +13,8 @@ interface FormType {
   messageTitle: string;
   aiGenerated: boolean;
   formDone: boolean;
+  backgroundImage: string;
+  setBackgroundImage: (backgroundImage: string) => void;
   signature: string;
   setSignature: (signature: string) => void;
   link: string;
@@ -43,6 +45,8 @@ export const useFormStore = create<FormType>((set) => ({
   recipientFirstName: "",
   template: "",
   message: "",
+  backgroundImage: "",
+  setBackgroundImage: (backgroundImage: string) => set({ backgroundImage }),
   messageTitle: "Will you be my val",
   aiGenerated: false,
   formDone: false,
