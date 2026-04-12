@@ -44,7 +44,7 @@ export const useFormStore = create<FormType>((set) => ({
   senderEmail: "",
   recipientFirstName: "",
   template: "",
-  message: "",
+  message: "heyyyyyy I love youuuuuuu to the moonnn and back  how are you????",
   backgroundImage: "",
   setBackgroundImage: (backgroundImage: string) => set({ backgroundImage }),
   messageTitle: "Will you be my val",

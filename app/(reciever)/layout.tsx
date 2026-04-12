@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import SidebarShell from "@/components/sidebar-shell";
-import ClientLayout from "../client-layout";
+import ReceiverLayout from "../receiver-layout";
 import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   title: "Linnked",
-  description: "Linnked - Valentines ",
+  description: "Someone has a message for you!",
 };
 
 const PPNeueBit = localFont({
@@ -24,12 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable}`}>
-      <body className="antialiased font-pp-neuebit">
-        <SidebarShell>
-            <ClientLayout>{children}</ClientLayout>
-        </SidebarShell>
-      </body>
-    </html>
+    <div className={`max-h-screen ${PPNeueBit.variable} ${PPMondWest.variable}`} >
+        <ReceiverLayout>
+          {children}
+        </ReceiverLayout>
+    </div>
   );
 }

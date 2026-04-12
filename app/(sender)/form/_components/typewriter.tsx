@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormStore } from "@/store/form.store";
@@ -6,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 const Typewriter = () => {
   // const [title, setTitle] = useState("");
-  const {message, setMessage} = useFormStore();
+  const { message, setMessage, messageTitle, setMessageTitle } = useFormStore();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
 
@@ -59,10 +60,17 @@ const Typewriter = () => {
 
   return (
     <div className="h-screen flex items-center flex-col">
-      <h1 className="text-[42.12px] font-normal font-pp-mondwest -tracking-[2%] mt-10 mb-[37px]">
-        Add a
-        <span className="text-[50px] font-bold font-pp-neuebit">Title</span>
-      </h1>
+      <div className=" mt-10 mb-[37px] flex items-end gap-2 w-full">
+        <span className="text-[42.12px] font-normal font-pp-mondwest -tracking-[2%] w-full">Add a</span>
+        <Input
+        type="text"
+        value={messageTitle}
+        onChange={(e) => setMessageTitle(e.target.value)}
+        placeholder="Title"
+        maxLength={40}
+        className="!w-[280px] border-0 bg-transparent p-0 text-[50px] leading-none font-bold font-pp-neuebit "
+        />
+      </div>
       <Tabs
         defaultValue="you"
         className="w-full h-full flex flex-col items-center justify-between"

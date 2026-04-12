@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
 import localFont from "next/font/local";
-import ClientLayout from "./client-layout";
-import SidebarShell from "@/components/sidebar-shell";
 
 export const metadata: Metadata = {
   title: "Linnked",
@@ -35,7 +31,6 @@ export default function RootLayout({
     <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable} `}>
       <body className="antialiased font-pp-neuebit">
         {children}
-          
       </body>
     </html>
   );

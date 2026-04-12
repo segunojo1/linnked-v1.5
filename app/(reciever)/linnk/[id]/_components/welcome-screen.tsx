@@ -1,12 +1,15 @@
-"use client";
-import { useFormStore } from "@/store/form.store";
-import Image from "next/image";
+import { useFormStore } from '@/store/form.store';
+import { useRecipientStore } from '@/store/recipient.store';
+import Image from 'next/image';
+import React from 'react'
 
-const LinnkPage = () => {
-  const { headerIcons } = useFormStore();
+const WelcomeScreen = () => {
+      const { headerIcons } = useFormStore();
+      const { setSteps } = useRecipientStore();
+    
   return (
-    <section className="relative z-[999999] h-screen flex flex-col items-center gap-12.5  max-h-screen mt-11.25">
-      <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest">
+    <section className="relative z-[999999] h-screen flex flex-col items-center gap-12.5  max-h-screen ">
+      <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest mt-11.25">
         Heyy Hasbiy
       </h1>
       <div className="flex items-center gap-6.25">
@@ -38,7 +41,7 @@ const LinnkPage = () => {
           Harry has created something special just for you!. They’ve sent you a
           heartfelt note, and now it’s time to read it. ✨
         </p>
-        <button className=" cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] ">
+        <button onClick={() => setSteps(2)} className=" cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] ">
           Read Message
           <Image
             src="/assets/left-arrow.svg"
@@ -60,10 +63,10 @@ const LinnkPage = () => {
             alt="love"
             width={153}
             height={153}
-            className="absolute top-30 left-10 z-[9999999999] "
+            className="absolute bottom-30 left-10 z-[9999999999] "
           />
     </section>
-  );
-};
+  )
+}
 
-export default LinnkPage;
+export default WelcomeScreen
