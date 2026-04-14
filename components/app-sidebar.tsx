@@ -56,19 +56,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <button
-          onClick={() => setSteps(steps - 1)}
-          className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px]"
-        >
-          <Image
-            src="/assets/left-arrow.svg"
-            alt="Back"
-            width={17}
-            height={17}
-            className=""
-          />
-          Back
-        </button>
+        {steps !== 6 && (
+          <button
+            onClick={() => setSteps(steps - 1)}
+            className="flex items-center gap-1 text-black px-[10px] py-[6.5px] bg-[#FAF9F5] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px]"
+          >
+            <Image
+              src="/assets/left-arrow.svg"
+              alt="Back"
+              width={17}
+              height={17}
+              className=""
+            />
+            Back
+          </button>
+        )}
       </SidebarHeader>
       <SidebarContent>
         {data.navMain.map((item) => (
