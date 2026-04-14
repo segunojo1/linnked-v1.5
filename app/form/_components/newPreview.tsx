@@ -32,6 +32,7 @@ const NewPreview = () => {
     signature,
     setSignature,
     backgroundImage,
+    messageTitle
   } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
   // const [signature, setSignature] = useState<string>("");
@@ -86,7 +87,7 @@ const NewPreview = () => {
         </div>
       ) : null}
       <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest">
-        A little something for you ;)
+       {messageTitle}
       </h1>
 
       <div className="flex items-center gap-6.25">

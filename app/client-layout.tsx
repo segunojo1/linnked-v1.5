@@ -62,7 +62,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       toast.error(
         `Background upload failed: ${error instanceof Error ? error.message : "Unknown error"}. Using local preview.`,
       );
-    }finally {
+    } finally {
       setIsBgUploading(false);
     }
   };
@@ -103,8 +103,17 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   const moveNext = async () => {
-    if (steps === 5) {
-      await submitMessage();
+    switch (steps) {
+      case 5:
+        await submitMessage();
+        break;
+      case 3:
+        if (message == "") {
+          return toast.error("Please enter a message");
+        }
+    
+      default:
+        break;
     }
     setSteps(steps + 1);
   };
@@ -140,13 +149,17 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
             onClick={handlePickBackground}
             className="flex  w-fit items-center gap-1 py-[5px] px-[10px] bg-[#FAF9F5] rounded-[22px]"
           >
-            <p>Add background image</p>
-            <Image
-              src="icons/arrow-up.svg"
-              alt="arrow up"
-              height={17}
-              width={17}
-            />
+            <p>{isBgUploading ? "Uploading..." : "Add background image"}</p>
+            {isBgUploading ? (
+              <span className="h-4 w-4 rounded-full border-2 border-stone-400 border-t-transparent animate-spin" />
+            ) : (
+              <Image
+                src="icons/arrow-up.svg"
+                alt="arrow up"
+                height={17}
+                width={17}
+              />
+            )}
           </button>
         )}
         <button

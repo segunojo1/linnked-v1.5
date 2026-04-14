@@ -33,6 +33,7 @@ const NewPreview = () => {
     signature,
     setSignature,
     backgroundImage,
+    messageTitle
   } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
   const [isSignatureUploading, setIsSignatureUploading] = useState(false);
@@ -137,7 +138,7 @@ const NewPreview = () => {
         </div>
       ) : null}
       <h1 className="text-[42.12px]/[100%] mt-11.25 font-normal -tracking-[2%] font-pp-mondwest">
-        A little something for you ;)
+        {messageTitle}
       </h1>
 
       <div className="flex items-center gap-6.25">
@@ -168,8 +169,8 @@ const NewPreview = () => {
         ))}
       </div>
 
-      <div className="w-full max-w-118 bg-white min-h-[60%] rounded-lg p-8 shadow-md flex flex-col justify-between ">
-        <div className="text-[16px] leading-6 font-neuemontreal font-medium text-stone-800 whitespace-pre-wrap mb-12">
+      <div className="w-full max-w-118 bg-white  h-fit  rounded-lg p-8 shadow-md flex flex-col justify-between ">
+        <div className="text-[16px] leading-6 font-neuemontreal max-h-[360px] overflow-y-scroll font-medium text-stone-800 whitespace-pre-wrap mb-5">
           {message}
         </div>
         <div className="">
@@ -191,7 +192,7 @@ const NewPreview = () => {
             alt="yes or no"
             height={34.9}
             width={81.5}
-            className="justify-self-end mt-8.75"
+            className="justify-self-end mt-2"
             draggable={false}
           />
         </div>
@@ -244,7 +245,7 @@ const NewPreview = () => {
 
                 <div className="mx-auto whitespace-pre-wrap wrap-break-word w-full max-w-full rounded-[18px] border border-stone-200 bg-[#f8f8f8] p-2 text-[30px]/[100%] font-neuemontreal text-stone-900">
                   {selectedIcon?.note ||
-                    "Everything about you reminds me of a pretty flower..."}
+                    ""}
                 </div>
 
                 <div className="rounded-[18px] border border-stone-200 bg-white p-4">

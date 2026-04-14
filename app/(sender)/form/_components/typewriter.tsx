@@ -56,20 +56,22 @@ const Typewriter = () => {
     };
   }, []);
 
-  
-
   return (
     <div className="h-screen flex items-center flex-col">
-      <div className=" mt-10 mb-[37px] flex items-end gap-2 w-full">
-        <span className="text-[42.12px] font-normal font-pp-mondwest -tracking-[2%] w-full">Add a</span>
-        <Input
-        type="text"
-        value={messageTitle}
-        onChange={(e) => setMessageTitle(e.target.value)}
-        placeholder="Title"
-        maxLength={40}
-        className="!w-[280px] border-0 bg-transparent p-0 text-[50px] leading-none font-bold font-pp-neuebit "
-        />
+      <div className="mt-10 mb-9 w-full max-w-[760px] px-4">
+        <div className="flex items-center justify-center gap-3">
+          <span className="shrink-0 text-[42.12px] font-normal font-pp-mondwest -tracking-[2%]">
+            Add a Title
+          </span>
+          <Input
+            type="text"
+            value={messageTitle}
+            onChange={(e) => setMessageTitle(e.target.value)}
+            placeholder="Title"
+            maxLength={40}
+            className="h-[50px] w-[320px] border-2 bg-transparent p-0 !text-[42px] leading-none font-bold font-pp-neuebit focus-visible:ring-0 "
+          />
+        </div>
       </div>
       <Tabs
         defaultValue="you"
@@ -90,7 +92,6 @@ const Typewriter = () => {
             <PenTool size={18} className="rotate-270" />
             Starting Typing.
           </Button> */}
-          
 
           <div className="relative w-full flex flex-col justify-center">
             <div className="flex relative justify-end mr-[50px]">
