@@ -1,11 +1,8 @@
-import { useFormStore } from "@/store/form.store";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import HeaderIcons from "./header-icons";
 
 const NoPage = () => {
-  const { headerIcons } = useFormStore();
   return (
     <section className="px-5 py-[15px] h-screen bg-[#FFF3F3]">
       <div className="relative flex flex-col h-full items-center border border-[#F0F0EF] rounded-[25px] gap-12.5 bg-white max-h-screen">

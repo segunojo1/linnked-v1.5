@@ -12,12 +12,12 @@ export const createLinnkSchema = z.object({
   icons: z
     .array(
       z.object({
-        position: z.number().int().min(1).max(5),
+        position: z.number().int().min(1).max(6),
         iconSrc: z.string().min(1),
         iconNote: z.string().optional(),
       })
     )
-    .length(5),
+    .length(6),
 })
 
 export const respondSchema = z.object({

@@ -135,7 +135,7 @@ const MainMessage = () => {
                   <button
                     type="button"
                     onClick={() => handleChoiceClick("yes")}
-                    disabled={!canRespond || isSubmitting}
+                    disabled={isSubmitting}
                     className="rounded-lg px-4 py-1.5 text-[24px]/[100%] font-bold text-white bg-red-500 hover:bg-red-600 transition-colors"
                   >
                     Yes

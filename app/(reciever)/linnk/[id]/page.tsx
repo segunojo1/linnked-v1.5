@@ -11,30 +11,31 @@ import axios from "axios";
 import { LoaderIcon } from "lucide-react";
 
 const LinnkPage = () => {
-  const { steps, setMessageDetails, loading, setLoading } = useRecipientStore();
+  const { steps, setMessageDetails, loading, setLoading, messageDetails } =
+    useRecipientStore();
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   const renderSteps = () => {
     switch (steps) {
       case 1:
-        return <WelcomeScreen />
+        return <WelcomeScreen />;
       case 2:
-        return <MainMessage />
+        return <MainMessage />;
       case 3:
-        return <Yes />
+        return <Yes />;
       case 4:
-         return <NoPage />
+        return <NoPage />;
       default:
         return null;
     }
-  }
+  };
 
   useEffect(() => {
     const fetchLinnkDetails = async () => {
       try {
         setLoading(true);
-        const {data} = await axios.get(`/api/linnks/${id}`);
+        const { data } = await axios.get(`/api/linnks/${id}`);
         console.log(data);
         setMessageDetails(data);
         setLoading(false);
@@ -42,32 +43,39 @@ const LinnkPage = () => {
         console.error("Failed to fetch linnk details", error);
         setLoading(false);
       }
-    }
+    };
 
     fetchLinnkDetails();
-  }, [id])
+  }, [id]);
 
   return (
-    <section className="">
+    <section
+      className="bg-cover bg-center bg-no-repeat"
+      style={
+        messageDetails?.backgroundImageUrl
+          ? { backgroundImage: `url(${messageDetails.backgroundImageUrl})` }
+          : undefined
+      }
+    >
       {loading ? (
         <div className="flex items-center justify-center min-h-screen">
-          <LoaderIcon className="animate-spin"/>
+          <LoaderIcon className="animate-spin" />
         </div>
       ) : (
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={steps}
-          initial={{ opacity: 0, y: 8}}
-          animate={{ opacity: 1, y: 0}}
-          exit={{ opacity: 0, y: -8}}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-        >
-          {renderSteps()}
-        </motion.div>
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={steps}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+          >
+            {renderSteps()}
+          </motion.div>
+        </AnimatePresence>
       )}
     </section>
-  )
+  );
 };
 
 export default LinnkPage;

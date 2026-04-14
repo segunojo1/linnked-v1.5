@@ -134,7 +134,7 @@ const SendMessage = () => {
             A little something for you Bae ;)
           </h1>
 
-          <div className="flex absolute right-24 top-10 items-center gap-4">
+          {/* <div className="flex absolute right-24 top-10 items-center gap-4">
             <input 
               type="file" 
               ref={fileInputRef} 
@@ -152,7 +152,6 @@ const SendMessage = () => {
               <Download size={16} />
             </Button>
             
-            {/* Next Button */}
             <Button 
               className="rounded-full bg-stone-100 hover:bg-stone-200 text-stone-900 gap-2 px-6 font-semibold"
               onClick={() => {
@@ -164,7 +163,7 @@ const SendMessage = () => {
               Next
               <ArrowRight size={18} />
             </Button>
-          </div>
+          </div> */}
 
         <main className="flex-1 flex flex-col items-center justify-start pt-8 pb-20 px-4 gap-8">
           

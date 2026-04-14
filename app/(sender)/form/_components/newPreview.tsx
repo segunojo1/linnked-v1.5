@@ -20,15 +20,22 @@ import {
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { iconOptions } from "@/lib/data";
-import { HeaderIconItem } from "@/types/data";
-
-
+import { toast } from "sonner";
+import axios from "axios";
 
 type IconCategory = keyof typeof iconOptions;
 
 const NewPreview = () => {
-  const { message, headerIcons, setHeaderIcons, signature, setSignature, backgroundImage } = useFormStore();
+  const {
+    message,
+    headerIcons,
+    setHeaderIcons,
+    signature,
+    setSignature,
+    backgroundImage,
+  } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
+  const [isSignatureUploading, setIsSignatureUploading] = useState(false);
   // const [signature, setSignature] = useState<string>("");
   const [isIconEditorOpen, setIsIconEditorOpen] = useState(false);
   const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(
@@ -66,21 +73,70 @@ const NewPreview = () => {
     );
   };
 
+  const uploadSignatureToCloudinary = async (signatureData: string) => {
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+    // Keep current behavior when Cloudinary is not configured.
+    if (!cloudName || !uploadPreset) {
+      return signatureData;
+    }
+
+    const blob = await fetch(signatureData).then((res) => res.blob());
+    const formData = new FormData();
+    formData.append("file", blob, `signature-${Date.now()}.png`);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("folder", "linnked/signatures");
+
+    const { data } = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      formData,
+    );
+
+    if (data.error) {
+      throw new Error("Failed to upload signature image");
+    }
+
+    // const uploaded = (await uploadResponse.json()) as { secure_url?: string };
+    if (!data.secure_url) {
+      throw new Error("Missing uploaded signature URL");
+    }
+
+    return data.secure_url;
+  };
+
+  const handleSignatureChange = async (signatureData: string) => {
+    // Show immediate preview even before upload completes.
+    setSignature(signatureData);
+
+    try {
+      setIsSignatureUploading(true);
+      const uploadedSignatureUrl =
+        await uploadSignatureToCloudinary(signatureData);
+      setSignature(uploadedSignatureUrl);
+
+      if (uploadedSignatureUrl !== signatureData) {
+        toast.success("Signature uploaded");
+      }
+    } catch (error) {
+      toast.error("Signature upload failed. Using local signature preview.");
+      console.error("Failed to upload signature", error);
+    } finally {
+      setIsSignatureUploading(false);
+    }
+  };
+
   return (
-    <section className="flex flex-col items-center gap-12.5 h-full max-h-screen mt-11.25">
+    <section className="relative w-full flex flex-col items-center gap-12.5 h-full max-h-screen overflow-hidden">
       {backgroundImage ? (
-              <div>
-                <Image
-                  src={backgroundImage}
-                  alt="Background"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-white/10" />
-              </div>
-            ) : null}
-      <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest">
+        <div
+          className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          <div className="absolute inset-0 bg-white/10" />
+        </div>
+      ) : null}
+      <h1 className="text-[42.12px]/[100%] mt-11.25 font-normal -tracking-[2%] font-pp-mondwest">
         A little something for you ;)
       </h1>
 
@@ -121,8 +177,11 @@ const NewPreview = () => {
             {signature ? (
               <img src={signature} alt="signature" className="w-32 h-20" />
             ) : (
-              <Button onClick={() => setIsSignatureOpen(true)}>
-                Add Signature
+              <Button
+                onClick={() => setIsSignatureOpen(true)}
+                disabled={isSignatureUploading}
+              >
+                {isSignatureUploading ? "Uploading..." : "Add Signature"}
               </Button>
             )}
           </div>
@@ -144,7 +203,7 @@ const NewPreview = () => {
             <DialogTitle>Sign Here</DialogTitle>
           </DialogHeader>
           <SignatureCanvas
-            onSignatureChange={setSignature}
+            onSignatureChange={handleSignatureChange}
             onClose={() => setIsSignatureOpen(false)}
           />
         </DialogContent>

@@ -1,14 +1,14 @@
 "use client";
 
-import { useFormStore } from "@/store/form.store";
 import confetti from "canvas-confetti";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import HeaderIcons from "./header-icons";
+import { useFormStore } from "@/store/form.store";
 
 const Yes = () => {
-  const { headerIcons } = useFormStore();
+  const { senderFirstName } = useFormStore();
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -82,7 +82,7 @@ const Yes = () => {
 
         <div className="flex flex-col items-center gap-[62px] mt-[62px]">
           <p className="text-[30px]/[100%] font-bold font-pp-neuebit max-w-[500px] text-center">
-            Looks like love is in the air! Harry will be thrilled to know that
+            Looks like love is in the air! {senderFirstName} will be thrilled to know that
             you said yes! Now, why not make their day even better? Send them a
             sweet message back!
           </p>

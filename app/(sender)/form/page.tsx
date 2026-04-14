@@ -41,7 +41,7 @@ const FormPage = () => {
     }
   };
   return (
-    <section className=" flex  flex-col bg items-center relative z-[9]  justify-center   min-h-screen">
+    <section className=" flex  flex-col bg items-center relative z-[9] justify-center   min-h-screen">
       {formSteps()}
     </section>
   );

@@ -38,7 +38,7 @@ export const NewSharePreview = () => {
     setLink,
   } = useFormStore();
 
-  const submitMessage = async () => {
+const submitMessage = async () => {
     try {
       console.log("sending");
       
@@ -72,17 +72,14 @@ export const NewSharePreview = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       {backgroundImage ? (
-        <div>
-          <Image
-            src={backgroundImage}
-            alt="Background"
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
+        <div
+          className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
           <div className="absolute inset-0 bg-white/10" />
         </div>
       ) : null}

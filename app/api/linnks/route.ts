@@ -10,6 +10,7 @@ export async function POST(req: Request) {
     console.log("Received request to create linnk");
     const json = await req.json();
     const parsed = createLinnkSchema.safeParse(json);
+    console.log(parsed);
 
     if (!parsed.success) {
       return NextResponse.json(
@@ -17,6 +18,7 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
+    
 
     const data = parsed.data;
 
