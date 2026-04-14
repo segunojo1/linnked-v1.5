@@ -12,14 +12,18 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { useParams } from "next/navigation";
 
 const MainMessage = () => {
-  const { setSteps } = useRecipientStore();
+  const { setSteps, messageDetails } = useRecipientStore();
   const { headerIcons, message, signature } = useFormStore();
   const [selectedChoice, setSelectedChoice] = useState<"yes" | "no" | null>(
     null,
   );
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const {id} = useParams();
 
   const handleChoiceClick = (choice: "yes" | "no") => {
     setSelectedChoice(choice);
@@ -35,11 +39,17 @@ const MainMessage = () => {
     }
   };
 
+  const handleResponsePick = (selectedChoice: "yes" | "no") => {
+    const response = axios.post(`/api/linnks/${id}/respond`, {
+      choice: selectedChoice 
+    })
+  }
+
   return (
     <section className="px-5 py-3.75 h-screen">
       <div className="relative flex flex-col h-full items-center rounded-[25px] gap-12.5 max-h-screen">
         <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest mt-10">
-          Heyy Hasbiy
+          Heyy {messageDetails?.recipientName}, {messageDetails?.messageTitle}
         </h1>
         <div className="flex items-center gap-6.25">
           {headerIcons.map((icon, index) => (
@@ -67,12 +77,12 @@ const MainMessage = () => {
 
         <div className="w-full max-w-118 bg-white min-h-[60%] -rotate-3 rounded-lg p-8 shadow-md flex flex-col justify-between ">
           <div className="text-[16px] leading-6 font-neuemontreal font-medium text-stone-800 whitespace-pre-wrap mb-12">
-            {message}
+            {messageDetails?.messageBody}
           </div>
           <div className="">
             <div className="flex flex-col gap-6 items-start">
-              {signature && (
-                <img src={signature} alt="signature" className="w-32 h-20" />
+              {messageDetails?.signatureImageUrl && (
+                <img src={messageDetails?.signatureImageUrl} alt="signature" className="w-32 h-20" />
               )}
             </div>
 

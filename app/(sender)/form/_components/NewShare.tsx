@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { useFormStore } from "@/store/form.store";
 import Image from "next/image";
 import { ShareSecond } from "./share";
+import axios from "axios";
+import { toast } from "sonner";
 
 const NewShare = () => {
   const { formDone } = useFormStore();
@@ -21,11 +23,55 @@ const NewShare = () => {
 export default NewShare;
 
 export const NewSharePreview = () => {
-  const { message, headerIcons, signature, backgroundImage } = useFormStore();
+  const {
+    message,
+    headerIcons,
+    signature,
+    backgroundImage,
+    senderFirstName,
+    senderEmail,
+    recipientFirstName,
+    template,
+    messageTitle,
+    setLoading,
+    setFormDone,
+    setLink,
+  } = useFormStore();
 
-  const submitMessage = () => {
+  const submitMessage = async () => {
+    try {
+      console.log("sending");
+      
+      setLoading(true);
 
-  }
+      const payload = {
+        senderName: senderFirstName,
+        senderEmail,
+        recipientName: recipientFirstName,
+        template: template === "singlepage" ? "singlepage" : "new",
+        messageTitle,
+        messageBody: message,
+        signatureImageUrl: signature || "",
+        backgroundImageUrl: backgroundImage || "",
+        icons: headerIcons.slice(0, 5).map((icon, index) => ({
+          position: index + 1,
+          iconSrc: icon.src,
+          iconNote: icon.note || "",
+        })),
+      };
+
+      const res = await axios.post("/api/linnks", payload)
+      const data = res.data;
+
+      toast(data.message);
+
+      setFormDone(true);
+      setLink(data.shareUrl);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {backgroundImage ? (
@@ -49,22 +95,22 @@ export const NewSharePreview = () => {
         <div className="flex items-center gap-6.25">
           {headerIcons.map((icon, index) => (
             <button
-            key={`${icon.alt}-${index}`}
-            type="button"
-            className="relative group"
-          >
+              key={`${icon.alt}-${index}`}
+              type="button"
+              className="relative group"
+            >
               <Image
                 src={icon.src}
                 alt={icon.alt}
                 height={icon.height}
                 width={icon.width}
               />
-                          <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-              {icon.note ? (
-                <span className="max-w-56 rounded-[10px] border-[.5px] border-[#E5E5E5] bg-[#FFFFFF1A] px-3 py-2 text-center text-[18px] leading-[1.05] text-stone-900 shadow-sm whitespace-pre-wrap wrap-break-word">
-                  {icon.note}
-                </span>
-              ) : null}
+              <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                {icon.note ? (
+                  <span className="max-w-56 rounded-[10px] border-[.5px] border-[#E5E5E5] bg-[#FFFFFF1A] px-3 py-2 text-center text-[18px] leading-[1.05] text-stone-900 shadow-sm whitespace-pre-wrap wrap-break-word">
+                    {icon.note}
+                  </span>
+                ) : null}
               </div>
             </button>
           ))}
@@ -89,10 +135,20 @@ export const NewSharePreview = () => {
               className="justify-self-end mt-8.75"
             />
           </div>
-
         </div>
-        <Button onClick={submitMessage} className='text-black mx-auto mb-[42px] hover:text-white w-[107px] bg-[#d3c2c2] py-[10px] px-5 flex items-center gap-[10px]'>Enter <Image src='/icons/arrow-up.svg' alt='arrow' className='group-hover:rotate-12 transition-all' width={20} height={20} /></Button>
-        
+        <Button
+          onClick={submitMessage}
+          className="text-black mx-auto mb-[42px] hover:text-white w-[107px] bg-[#d3c2c2] py-[10px] px-5 flex items-center gap-[10px]"
+        >
+          Enter
+          <Image
+            src="/icons/arrow-up.svg"
+            alt="arrow"
+            className="group-hover:rotate-12 transition-all"
+            width={20}
+            height={20}
+          />
+        </Button>
       </section>
     </>
   );

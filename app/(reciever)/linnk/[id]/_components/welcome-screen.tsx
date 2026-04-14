@@ -5,12 +5,12 @@ import React from 'react'
 
 const WelcomeScreen = () => {
       const { headerIcons } = useFormStore();
-      const { setSteps } = useRecipientStore();
+      const { setSteps, messageDetails } = useRecipientStore();
     
   return (
     <section className="relative z-[999999] h-screen flex flex-col items-center gap-12.5  max-h-screen ">
       <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest mt-11.25">
-        Heyy Hasbiy
+        Heyy {messageDetails?.recipientName || "there"}
       </h1>
       <div className="flex items-center gap-6.25">
         {headerIcons.map((icon, index) => (
@@ -38,7 +38,7 @@ const WelcomeScreen = () => {
 
       <div className="flex flex-col items-center gap-[62px] mt-[62px]">
         <p className="text-[30px]/[100%] font-bold font-pp-neuebit max-w-[500px] text-center">
-          Harry has created something special just for you!. They’ve sent you a
+          {messageDetails.senderName || "Someone"} has created something special just for you!. They’ve sent you a
           heartfelt note, and now it’s time to read it. ✨
         </p>
         <button onClick={() => setSteps(2)} className=" cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] ">

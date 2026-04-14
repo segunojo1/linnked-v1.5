@@ -5,9 +5,15 @@ import MainMessage from "./_components/main_message";
 import { AnimatePresence, motion } from "motion/react";
 import Yes from "./_components/yes";
 import NoPage from "./_components/no";
+import { useEffect } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
+import { LoaderIcon } from "lucide-react";
 
 const LinnkPage = () => {
-  const { steps } = useRecipientStore();
+  const { steps, setMessageDetails, loading, setLoading } = useRecipientStore();
+
+  const {id} = useParams();
 
   const renderSteps = () => {
     switch (steps) {
@@ -24,8 +30,30 @@ const LinnkPage = () => {
     }
   }
 
+  useEffect(() => {
+    const fetchLinnkDetails = async () => {
+      try {
+        setLoading(true);
+        const {data} = await axios.get(`/api/linnks/${id}`);
+        console.log(data);
+        setMessageDetails(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch linnk details", error);
+        setLoading(false);
+      }
+    }
+
+    fetchLinnkDetails();
+  }, [id])
+
   return (
     <section className="">
+      {loading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <LoaderIcon className="animate-spin"/>
+        </div>
+      ) : (
       <AnimatePresence mode="wait">
         <motion.div
           key={steps}
@@ -37,6 +65,7 @@ const LinnkPage = () => {
           {renderSteps()}
         </motion.div>
       </AnimatePresence>
+      )}
     </section>
   )
 };
