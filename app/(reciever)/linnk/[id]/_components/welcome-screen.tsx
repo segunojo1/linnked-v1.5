@@ -2,6 +2,7 @@ import { useFormStore } from '@/store/form.store';
 import { useRecipientStore } from '@/store/recipient.store';
 import Image from 'next/image';
 import React from 'react'
+import HeaderIcons from './header-icons';
 
 const WelcomeScreen = () => {
       const { headerIcons } = useFormStore();
@@ -12,33 +13,33 @@ const WelcomeScreen = () => {
       <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest mt-11.25">
         Heyy {messageDetails?.recipientName || "there"}
       </h1>
-      <div className="flex items-center gap-6.25">
-        {headerIcons.map((icon, index) => (
+      {/* <div className="flex items-center gap-6.25">
+        {messageDetails?.icons.map((icon, index) => (
           <button
-            key={`${icon.alt}-${index}`}
+            key={`${icon.position}-${index}`}
             type="button"
             className="relative group"
           >
             <Image
-              src={icon.src}
-              alt={icon.alt}
-              height={icon.height}
-              width={icon.width}
+              src={icon.iconSrc}
+              alt={icon.iconNote || `icon-${index}`}
+              height={80}
+              width={80}
             />
             <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-              {icon.note ? (
+              {icon.iconNote ? (
                 <span className="max-w-56 rounded-[10px] border-[.5px] border-[#E5E5E5] bg-[#FFFFFF1A] px-3 py-2 text-center text-[18px] leading-[1.05] text-stone-900 shadow-sm whitespace-pre-wrap wrap-break-word">
-                  {icon.note}
+                  {icon.iconNote}
                 </span>
               ) : null}
             </div>
           </button>
         ))}
-      </div>
-
+      </div> */}
+      <HeaderIcons />
       <div className="flex flex-col items-center gap-[62px] mt-[62px]">
         <p className="text-[30px]/[100%] font-bold font-pp-neuebit max-w-[500px] text-center">
-          {messageDetails.senderName || "Someone"} has created something special just for you!. They’ve sent you a
+          {messageDetails?.senderName || "Someone"} has created something special just for you!. They’ve sent you a
           heartfelt note, and now it’s time to read it. ✨
         </p>
         <button onClick={() => setSteps(2)} className=" cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] ">

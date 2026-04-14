@@ -53,7 +53,7 @@ export const NewSharePreview = () => {
         messageBody: message,
         signatureImageUrl: signature || "",
         backgroundImageUrl: backgroundImage || "",
-        icons: headerIcons.slice(0, 5).map((icon, index) => ({
+        icons: headerIcons.slice(0, 6).map((icon, index) => ({
           position: index + 1,
           iconSrc: icon.src,
           iconNote: icon.note || "",

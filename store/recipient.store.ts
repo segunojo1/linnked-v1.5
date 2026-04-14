@@ -7,7 +7,7 @@ interface messageDetailsT {
   recipientName: string;
   messageBody: string;
   messageTitle: string;
-  result: boolean | null;
+  result: { choice: "yes" | "no"; respondedAt: string } | null;
   senderEmail: string;
   senderName: string;
   signatureImageUrl: string;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Linnked",
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable} `}>
       <body className="antialiased font-pp-neuebit">
         {children}
+        <Toaster />
       </body>
     </html>
   );

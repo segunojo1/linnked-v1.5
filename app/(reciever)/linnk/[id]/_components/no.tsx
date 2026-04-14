@@ -2,6 +2,7 @@ import { useFormStore } from "@/store/form.store";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import HeaderIcons from "./header-icons";
 
 const NoPage = () => {
   const { headerIcons } = useFormStore();
@@ -11,7 +12,7 @@ const NoPage = () => {
         <h1 className="text-[42.12px]/[100%] font-normal -tracking-[2%] font-pp-mondwest mt-[45px]">
           Not this <span className="font-bold">time....</span>.
         </h1>
-        <div className="flex items-center gap-6.25">
+        {/* <div className="flex items-center gap-6.25">
           {headerIcons.map((icon, index) => (
             <button
               key={`${icon.alt}-${index}`}
@@ -33,7 +34,8 @@ const NoPage = () => {
               </div>
             </button>
           ))}
-        </div>
+        </div> */}
+        <HeaderIcons />
 
         <div className="flex flex-col items-center gap-[62px] mt-[62px]">
           <p className="text-[30px]/[100%] font-bold font-pp-neuebit max-w-[500px] text-center">
