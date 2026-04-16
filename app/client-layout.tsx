@@ -57,10 +57,11 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       );
       setBackgroundImage(publicUrl);
       URL.revokeObjectURL(objectUrl);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       toast.error(
-        `Background upload failed: ${error instanceof Error ? error.message : "Unknown error"}. Using local preview.`,
+        `Background upload failed: ${errorMessage}. Using local preview.`,
       );
     } finally {
       setIsBgUploading(false);
@@ -97,8 +98,8 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       // setFormDone(true);
       setLink(data.shareUrl);
       console.log(data);
-    } catch (error) {
-      console.log(error.message);
+    } catch (error: unknown) {
+      console.log(error instanceof Error ? error.message : "Unknown error");
     }
   };
 
