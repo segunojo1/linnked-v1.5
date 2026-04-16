@@ -111,7 +111,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         if (message == "") {
           return toast.error("Please enter a message");
         }
-    
+
       default:
         break;
     }

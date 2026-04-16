@@ -1,14 +1,51 @@
+"use client";
+
 import { initialHeaderIcons } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const sectionIds = ["linnked", "write", "customize", "share", "team"] as const;
+type SectionId = (typeof sectionIds)[number];
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState<SectionId>("linnked");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio ||
+              a.boundingClientRect.top - b.boundingClientRect.top,
+          )[0];
+
+        if (visible?.target.id) {
+          setActiveSection(visible.target.id as SectionId);
+        }
+      },
+      {
+        root: null,
+        threshold: [0.25, 0.4, 0.6, 0.75],
+        rootMargin: "-20% 0px -55% 0px",
+      },
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
   return (
-    <section className="py-[15px] px-5">
+    <section className="py-[15px] px-5 h-screen flex">
       <div className="flex border border-[#F0F0EF] rounded-[25px]">
-        <Sidebar />
-        <main className="w-full">
-          <div className="w-full flex flex-col items-center relative">
+        <Sidebar activeSection={activeSection} />
+        <main className="w-full ml-[213px]">
+          <div id="linnked" className="w-full flex flex-col items-center relative">
             <Link
               href="/form"
               className="absolute right-12 z-[9999999] top-[35px] cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] "
@@ -150,7 +187,7 @@ export default function Home() {
                   />
                 </button>
                 <h2 className="text-[35px]/[100%] mt-[37px] mb-[140px] -tracking-[2%] font-pp-mondwest mx-auto text-center">
-                  Choose a{" "}
+                  Choose a
                   <span className="font-bold font-pp-neuebit">Template.</span>
                 </h2>
 
@@ -181,7 +218,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex border border-[#F0F0EF] flex-col items-center justify-center relative h-[278px]">
+          <div id="write" className="flex border border-[#F0F0EF] flex-col items-center justify-center relative h-[278px]">
             <h2 className="text-[100px]/[100%] font-bold -tracking-[2%] font-pp-neuebit">
               Write your message
             </h2>
@@ -214,7 +251,7 @@ export default function Home() {
             <Image src="/assets/ai-help.svg" alt="" width={1166} height={317} />
           </div>
 
-          <div className="flex flex-col gap-[39px] py-[77px] border border-[#F0F0EF] items-center">
+          <div id="customize"  className="flex flex-col gap-[39px] py-[77px] border border-[#F0F0EF] items-center">
             <h2 className="text-[100px]/[100%] font-bold -tracking-[2%] font-pp-neuebit">
               Customize your message
             </h2>
@@ -284,7 +321,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="relative h-screen flex items-center justify-center">
+          <div id="share" className="relative h-screen flex items-center justify-center">
             <span className="relative">
               <h2 className="text-[100px]/[100%] font-bold relative -tracking-[2%]">
                 Share your Message
@@ -299,35 +336,128 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="flex items-center justify-center mt-[50px] border border-[#F0F0EF] p-6">
-            <Image src="/assets/linnked-logo.svg" alt="linnked" width={691} height={140}/>
+          <div className="flex flex-col items-center justify-center gap-[34px] mt-[50px] border border-[#F0F0EF] p-6">
+            <Image
+              src="/assets/linnked-logo.svg"
+              alt="linnked"
+              width={691}
+              height={140}
+            />
 
-            <div className="flex flex-col bg-[url(`/assets/bg1.png`)] bg-cover bg-center h-[730px] items-center gap-[35px] ">
-              <h2 className="text-[119px]/[100%] font-bold font-pp-neuebit -tracking-[2%]">Linnked was built by a small team.</h2>
+            <div id="team" className="flex flex-col bg-[url('/assets/bg1.png')] rounded-[24px] bg-cover bg-center h-[730px] items-center justify-center gap-[35px] w-full ">
+              <h2 className="text-[119px]/[100%] font-bold font-pp-neuebit -tracking-[2%] text-white">
+                Linnked was built by a small team.
+              </h2>
               <Link
-              href="/form"
-              className=" z-[9999999] cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] "
-            >
-              Meet the team.
+                href="/form"
+                className=" z-[9999999] cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] "
+              >
+                Meet the team.
+                <Image
+                  src="/assets/left-arrow.svg"
+                  alt="Back"
+                  width={17}
+                  height={17}
+                  className="rotate-180"
+                />
+              </Link>
+            </div>
+
+            <div className="flex flex-col bg-[url('/assets/bg3.png')] rounded-[24px] bg-cover bg-center relative h-[1128px] items-center justify-center gap-[35px] w-full ">
               <Image
-                src="/assets/left-arrow.svg"
-                alt="Back"
-                width={17}
-                height={17}
-                className="rotate-180"
+                src="/assets/circle.svg"
+                alt="customize"
+                width={80}
+                height={80}
+                className="top-20 left-20 absolute"
               />
-            </Link>
+              <Image
+                src="/assets/gaming.svg"
+                alt="gaming"
+                width={96}
+                height={135}
+                className="absolute top-[298px] left-[442px]"
+              />
+              <Image
+                src="/assets/done.svg"
+                alt="done"
+                width={144}
+                height={144}
+                className="right-[95px] bottom-[360px] absolute"
+              />
+              <Image
+                src="/assets/stand.svg"
+                alt="stand"
+                width={141}
+                height={133}
+                className="absolute bottom-0 left-0"
+              />
+              <Image
+                src="/assets/popcorn.svg"
+                alt="popcorn"
+                width={144}
+                height={144}
+                className="right-[398px] bottom-0 absolute"
+              />
+              <Image
+                src="/assets/leaf.svg"
+                alt="leaf"
+                width={111}
+                height={111}
+                className="right-0 bottom-[145px] absolute"
+              />
+              <Image
+                src="/assets/email.svg"
+                alt="email"
+                width={111}
+                height={111}
+                className="right-[184px] top-[178px] absolute"
+              />
+
+              <h2 className="text-[119px]/[100%] font-bold font-pp-neuebit -tracking-[2%] text-white">
+                Send a Message they’ll never forget.
+              </h2>
+              <Link
+                href="/form"
+                className=" z-[9999999] cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] "
+              >
+                Send your Linnk
+                <Image
+                  src="/assets/left-arrow.svg"
+                  alt="Back"
+                  width={17}
+                  height={17}
+                  className="rotate-180"
+                />
+              </Link>
+
+              <Image
+                src="/assets/customize.svg"
+                alt="customize"
+                width={446}
+                height={45}
+              />
+
+              <p className="text-[59px]/[100%] font-bold -tracking-[2%] font-pp-neuebit absolute right-[47px] bottom-6 text-white">Linnked</p>
             </div>
           </div>
-        </main>
+        </main> 
       </div>
     </section>
   );
 }
 
-const Sidebar = () => {
+const Sidebar = ({ activeSection }: { activeSection: SectionId }) => {
+  const items: Array<{ id: SectionId; label: string }> = [
+    { id: "linnked", label: "Linnked" },
+    { id: "write", label: "Write" },
+    { id: "customize", label: "Customize" },
+    { id: "share", label: "Share" },
+    { id: "team", label: "Team" },
+  ];
+
   return (
-    <aside className="h-screen flex flex-col justify-between p-8 border-r border-[#F0F0EF] w-fit">
+    <aside className="h-screen fixed flex flex-col justify-between p-8 border-r border-[#F0F0EF] w-fit">
       <Image
         src="/assets/linnk.svg"
         alt="linnked"
@@ -336,21 +466,23 @@ const Sidebar = () => {
         height={158}
       />
       <ul className="flex flex-col text-[22.45px]/[100%] font-bold font-pp-neuebit gap-[5px]">
-        <li className="bg-[#FAF9F5] py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit">
-          Linnked
-        </li>
-        <li className="bg-[#FAF9F5] py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit">
-          Write
-        </li>
-        <li className="bg-[#FAF9F5] py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit">
-          Customize
-        </li>
-        <li className="bg-[#FAF9F5] py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit">
-          Share
-        </li>
-        <li className="bg-[#FAF9F5] py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit">
-          Team
-        </li>
+        {items.map((item) => {
+          const isActive = activeSection === item.id;
+
+          return (
+            <li
+              key={item.id}
+              className={[
+                "py-[2.5px] px-[12.47px] rounded-[7.48px] w-fit transition-all duration-200",
+                isActive
+                  ? "bg-black text-white scale-[1.04]"
+                  : "bg-[#FAF9F5] text-black",
+              ].join(" ")}
+            >
+              {item.label}
+            </li>
+          );
+        })}
         <Image
           src="/assets/stand.svg"
           alt="stand"

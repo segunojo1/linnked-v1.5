@@ -38,10 +38,10 @@ export const NewSharePreview = () => {
     setLink,
   } = useFormStore();
 
-const submitMessage = async () => {
+  const submitMessage = async () => {
     try {
       console.log("sending");
-      
+
       setLoading(true);
 
       const payload = {
@@ -60,7 +60,7 @@ const submitMessage = async () => {
         })),
       };
 
-      const res = await axios.post("/api/linnks", payload)
+      const res = await axios.post("/api/linnks", payload);
       const data = res.data;
 
       toast(data.message);
