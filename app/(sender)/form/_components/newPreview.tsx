@@ -37,7 +37,6 @@ const NewPreview = () => {
   } = useFormStore();
   const [isSignatureOpen, setIsSignatureOpen] = useState(false);
   const [isSignatureUploading, setIsSignatureUploading] = useState(false);
-  // const [signature, setSignature] = useState<string>("");
   const [isIconEditorOpen, setIsIconEditorOpen] = useState(false);
   const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(
     null,
@@ -224,14 +223,14 @@ const NewPreview = () => {
             </Button>
           </SheetHeader>
 
-          <div className="px-6 py-5">
-            <Tabs value={editorTab} onValueChange={setEditorTab}>
+          <div className="px-6 py-5 h-full">
+            <Tabs value={editorTab} onValueChange={setEditorTab} className="h-full">
               <TabsList className="grid w-fit grid-cols-2">
                 <TabsTrigger value="note">Add Note</TabsTrigger>
                 <TabsTrigger value="change">Change Icon</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="note" className="mt-3 space-y-6">
+              <TabsContent value="note" className="mt-3 flex flex-col space-y-6 h-full">
                 <div className="flex justify-center">
                   {selectedIcon && (
                     <Image
@@ -243,11 +242,11 @@ const NewPreview = () => {
                   )}
                 </div>
 
-                <div className="mx-auto whitespace-pre-wrap wrap-break-word w-full max-w-full rounded-[18px] border border-stone-200 bg-[#f8f8f8] p-2 text-[30px]/[100%] font-neuemontreal text-stone-900">
+                <div className="mx-auto whitespace-pre-wrap wrap-break-word w-full max-w-[207px] max-h-[130px] overflow-y-scroll rounded-[18px] border border-stone-200 bg-[#f8f8f8] p-2 text-[12px]/[100%] font-pp-mondwest text-stone-900 font-medium">
                   {selectedIcon?.note || ""}
                 </div>
 
-                <div className="rounded-[18px] border border-stone-200 bg-white p-4">
+                <div className="rounded-[18px] mt-auto justify-self-end bottom-0 border border-stone-200 bg-white p-4">
                   <Textarea
                     value={selectedIcon?.note || ""}
                     onChange={(e) => updateSelectedIconNote(e.target.value)}

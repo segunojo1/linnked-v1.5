@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -125,10 +125,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    
   }
 }
 
-.indie-flower{
+.indie-flower {
   font-family: "Indie Flower", cursive;
 }
+

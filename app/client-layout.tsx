@@ -104,6 +104,10 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
 
   const moveNext = async () => {
     switch (steps) {
+      case 2:
+        if ( template == "") {
+          return toast.error("Please select a template");
+        }
       case 5:
         await submitMessage();
         break;

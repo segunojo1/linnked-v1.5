@@ -348,7 +348,7 @@ export default function Home() {
               <h2 className="text-[119px]/[100%] font-bold font-pp-neuebit -tracking-[2%] text-white">
                 Linnked was built by a small team.
               </h2>
-              <Link
+              {/* <Link
                 href="/form"
                 className=" z-[9999999] cursor-pointer flex items-center  gap-1 text-black px-[10px] py-[6.5px] bg-[#FFF3F3] text-[20px]/[100%] tracking-[2%] font-bold w-fit rounded-[22px] "
               >
@@ -360,7 +360,7 @@ export default function Home() {
                   height={17}
                   className="rotate-180"
                 />
-              </Link>
+              </Link> */}
             </div>
 
             <div className="flex flex-col bg-[url('/assets/bg3.png')] rounded-[24px] bg-cover bg-center relative h-[1128px] items-center justify-center gap-[35px] w-full ">
@@ -414,7 +414,7 @@ export default function Home() {
                 className="right-[184px] top-[178px] absolute"
               />
 
-              <h2 className="text-[119px]/[100%] font-bold font-pp-neuebit -tracking-[2%] text-white">
+              <h2 className="text-[119px]/[100%] text-center font-bold font-pp-neuebit -tracking-[2%] text-white">
                 Send a Message they’ll never forget.
               </h2>
               <Link

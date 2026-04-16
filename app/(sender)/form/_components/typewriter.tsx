@@ -79,7 +79,7 @@ const Typewriter = () => {
       >
         <TabsList className="text-[20px] font-bold  font-pp-neuebit">
           <TabsTrigger value="you">Write yourself</TabsTrigger>
-          <TabsTrigger value="ai">Let AI help</TabsTrigger>
+          {/* <TabsTrigger value="ai">Let AI help</TabsTrigger> */}
         </TabsList>
         <TabsContent
           value="you"

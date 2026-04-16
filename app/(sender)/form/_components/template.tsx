@@ -7,10 +7,12 @@ const Template = () => {
 
   return (
     <section className="flex flex-col items-center gap-[50px] h-full max-h-screen mt-[45px]">
-      <h2 className="text-[50px]/[100%] font-normal font-pp-mondwest">Choose a <span className="font-bold font-pp-neuebit">Template</span></h2>
+      <h2 className="text-[50px]/[100%] font-normal font-pp-mondwest">
+        Choose a <span className="font-bold font-pp-neuebit">Template</span>
+      </h2>
       <div className="flex gap-[17px]">
-        <SinglePageTemplate />
-        <MultiPageTemplate />
+        <SinglePageTemplate comingSoon />
+        <MultiPageTemplate comingSoon />
         <NewTemplate />
       </div>
       <Button
@@ -33,18 +35,30 @@ const Template = () => {
 
 export default Template;
 
-const SinglePageTemplate = () => {
+const SinglePageTemplate = ({
+  comingSoon = false,
+}: {
+  comingSoon?: boolean;
+}) => {
   const { template, setTemplate, senderFirstName } = useFormStore();
   return (
     <div
-      className={
-        template == "singlepage"
-          ? "border-[4px] border-black rounded-xl p-3 "
-          : ""
-      }
-      onClick={() => setTemplate("singlepage")}
+      className={[
+        "relative rounded-xl",
+        template == "singlepage" && !comingSoon
+          ? "border-[4px] border-black p-3"
+          : "",
+      ].join(" ")}
+      onClick={() => {
+        if (!comingSoon) setTemplate("singlepage");
+      }}
     >
-      <div className="flex flex-col gap-[10px] max-w-[345px] cursor-pointer">
+      <div
+        className={[
+          "flex flex-col gap-[10px] max-w-[345px]",
+          comingSoon ? "cursor-not-allowed opacity-90" : "cursor-pointer",
+        ].join(" ")}
+      >
         <div className="p-2 bg-[#FAF9F5] flex rounded-[14.55px] min-h-[388px] h-full ">
           <div className=" p-5 flex flex-col justify-between rounded-[14.55px] bg-[#d9d9d928] min-h-full border border-[#ffffff]">
             <div className="bg-[url('/assets/love2.png')] bg-[#FFF3F3] bg-contain bg-no-repeat h-fit pt-[31px] px-[51px]">
@@ -111,26 +125,47 @@ const SinglePageTemplate = () => {
               </article>
             </div>
 
-            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">One Pager (Love)</h2>
+            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">
+              One Pager (Love)
+            </h2>
           </div>
         </div>
       </div>
+      {comingSoon ? (
+        <div className="absolute inset-0 z-30 rounded-xl bg-black/35 backdrop-blur-[2px] flex items-center justify-center">
+          <div className="bg-[#FFF3F3] text-black font-pp-neuebit font-bold text-[22px]/[100%] px-4 py-2 rounded-full">
+            Coming Soon
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
 
-const MultiPageTemplate = () => {
+const MultiPageTemplate = ({
+  comingSoon = false,
+}: {
+  comingSoon?: boolean;
+}) => {
   const { template, setTemplate, senderFirstName } = useFormStore();
   return (
     <div
-      className={
-        template == "multipage"
-          ? "border-[4px] border-black rounded-xl p-3"
-          : ""
-      }
-      onClick={() => setTemplate("multipage")}
+      className={[
+        "relative rounded-xl",
+        template == "multipage" && !comingSoon
+          ? "border-[4px] border-black p-3"
+          : "",
+      ].join(" ")}
+      onClick={() => {
+        if (!comingSoon) setTemplate("multipage");
+      }}
     >
-      <div className="flex flex-col gap-[10px] max-w-[343px]  cursor-pointer">
+      <div
+        className={[
+          "flex flex-col gap-[10px] max-w-[343px]",
+          comingSoon ? "cursor-not-allowed opacity-90" : "cursor-pointer",
+        ].join(" ")}
+      >
         <div className="p-2 bg-[#FAF9F5] rounded-[14.55px] flex min-h-[388px] h-full">
           <div className=" p-5 px-[38px] flex flex-col justify-between border-[#ffffff] border  rounded-[14.55px] bg-[#d9d9d928]">
             <article className="px-[25px] bg-white pt-[30px] pb-[11px] flex flex-col h-fit">
@@ -192,32 +227,45 @@ const MultiPageTemplate = () => {
               />
             </article>
 
-            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">Multi-Paged</h2>
+            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">
+              Multi-Paged
+            </h2>
           </div>
         </div>
       </div>
+      {comingSoon ? (
+        <div className="absolute inset-0 z-30 rounded-xl bg-black/35 backdrop-blur-[2px] flex items-center justify-center">
+          <div className="bg-[#FFF3F3] text-black font-pp-neuebit font-bold text-[22px]/[100%] px-4 py-2 rounded-full">
+            Coming Soon
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
-
 
 const NewTemplate = () => {
   const { template, setTemplate, senderFirstName } = useFormStore();
   return (
     <div
       className={
-        template == "new"
-          ? "border-[4px] border-black rounded-xl p-3"
-          : ""
+        template == "new" ? "border-[4px] border-black rounded-xl p-3" : ""
       }
       onClick={() => setTemplate("new")}
     >
       <div className="flex flex-col gap-[10px] max-w-[378px]  cursor-pointer">
         <div className="p-2 bg-[#FAF9F5] rounded-[14.55px] flex min-h-[388px] h-full">
           <div className=" p-5  flex flex-col items-center justify-between border-[#ffffff] border  rounded-[14.55px] bg-[#d9d9d928]">
-            <Image src="/assets/newtemplate.svg" alt="new template" width={187} height={267} />
+            <Image
+              src="/assets/newtemplate.svg"
+              alt="new template"
+              width={187}
+              height={267}
+            />
 
-            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">One Pager (Subtle)</h2>
+            <h2 className="text-[42px]/[100%] mt-[13px] font-normal font-pp-mondwest -tracking-[4%]">
+              One Pager (Subtle)
+            </h2>
           </div>
         </div>
       </div>
