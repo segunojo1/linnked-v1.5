@@ -41,7 +41,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
   return (
-    <section className="py-[15px] px-5 h-screen flex">
+    <section className="py-[15px] px-5 h-screen flex justify-center">
       <div className="flex border border-[#F0F0EF] rounded-[25px]">
         <Sidebar activeSection={activeSection} />
         <main className="w-full ml-[213px]">
