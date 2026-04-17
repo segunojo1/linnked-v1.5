@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useFormStore } from "@/store/form.store";
 import Image from "next/image";
-import SignatureCanvas from "./signature-canvas";
 import {
   Dialog,
   DialogContent,
@@ -22,6 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { iconOptions } from "@/lib/data";
 import { toast } from "sonner";
 import axios from "axios";
+import SignatureCanvas from "./signature-canvas";
 
 type IconCategory = keyof typeof iconOptions;
 
