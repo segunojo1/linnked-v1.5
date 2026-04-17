@@ -24,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className={`max-h-screen ${PPNeueBit.variable} ${PPMondWest.variable}`} >
-        <ReceiverLayout>
-          {children}
-        </ReceiverLayout>
+      <ReceiverLayout>{children}</ReceiverLayout>
     </div>
   );
 }

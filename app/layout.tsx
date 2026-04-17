@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import MobileWrapper from "./mobile-wrapper";
 
 export const metadata: Metadata = {
   title: "Linnked",
@@ -31,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${PPNeueBit.variable} ${PPMondWest.variable} `}>
       <body className="antialiased font-pp-neuebit">
-        {children}
+        <MobileWrapper>{children}</MobileWrapper>
         <Toaster />
       </body>
     </html>
