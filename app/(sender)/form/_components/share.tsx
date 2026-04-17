@@ -143,7 +143,7 @@ export const ShareSecond = () => {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(`https://linnked.vercel.app${link}`);
+      await navigator.clipboard.writeText(`https://linnnked.vercel.app${link}`);
       setCopied(true);
 
       // Reset the copied state after 2 seconds
@@ -557,7 +557,7 @@ export const ShareSecond = () => {
         </div>
       </section>
 
-      <p className="text-[30px] text-center mt-9">{`https://linnked.vercel.app${link}`}</p>
+      <p className="text-[30px] text-center mt-9">{`https://linnnked.vercel.app${link}`}</p>
       {/* <Image src='/assets/done.svg' alt='' width={174} height={174} className='cursor-pointer absolute top-96 right-48' /> */}
 
       <Image
