@@ -154,7 +154,7 @@ const NewPreview = () => {
               height={icon.height}
               width={icon.width}
             />
-            <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+            <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 flex-col items-center gap-1  transition-opacity duration-150 opacity-100">
               <span className="whitespace-nowrap rounded-full bg-[#F6EDEC] px-3 py-1 text-[20px] leading-none text-black shadow-sm">
                 Click to Edit -&gt;
               </span>
